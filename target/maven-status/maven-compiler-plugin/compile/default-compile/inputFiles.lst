@@ -1,0 +1,11 @@
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\constants\TestGroups.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\constants\Timeouts.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\constants\Urls.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\enums\Department.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\enums\Location.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\pages\BasePage.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\pages\CareersPage.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\pages\HomePage.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\pages\OpenPositionsPage.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\pages\QaCareersPage.java
+C:\Users\Emre\projects\insider-careers-selenium\src\main\java\com\insider\utils\WindowUtils.java
