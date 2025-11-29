@@ -42,7 +42,7 @@ src
             ├── CareersPageTest.java       // Key sections on Careers page
             ├── QaCareersPageTest.java     // QA Careers page and "See all QA jobs" visibility
             └── OpenPositionsPageTest.java // Filters + card checks + Lever tab behaviour
-
+```
 ## File responsibilities
 
 Timeouts.java  
