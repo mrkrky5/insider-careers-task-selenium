@@ -96,6 +96,21 @@ Directly opens the QA careers page and checks both that the page is loaded and t
 OpenPositionsPageTest.java  
 End-to-end flow starting from the QA careers page: clicks “See all QA jobs”, verifies the QA open positions URL, applies department and location filters, validates every job card and confirms that clicking “View Role” opens Lever in a new tab.
 
+## Running the suite
+
+1. Make sure you have the following installed:
+   - Java 11+ (project was developed with Java 17)
+   - Maven
+   - Google Chrome
+
+2. Clone this repository and go into the project folder:
+
+   ```bash
+   git clone https://github.com/mrkrky5/insider-careers-task-selenium.git
+   cd insider-careers-task-selenium
+   mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+
+
 ## Notes
 
 This project was prepared as a focused UI automation suite for the Insider Careers pages.  
