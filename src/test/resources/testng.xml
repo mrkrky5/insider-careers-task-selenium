@@ -1,5 +1,10 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="Insider Careers Suite" verbose="1">
+
+    <listeners>
+        <listener class-name="com.insider.listeners.ScreenshotOnFailureListener"/>
+    </listeners>
+
     <test name="Assignment Flow">
         <classes>
             <!-- 1. Home page basic smoke -->
@@ -16,7 +21,6 @@
 
             <!-- 5. Open positions filters + Lever tab -->
             <class name="com.insider.tests.OpenPositionsPageTest"/>
-
         </classes>
     </test>
 </suite>

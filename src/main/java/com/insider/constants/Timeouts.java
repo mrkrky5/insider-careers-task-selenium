@@ -3,29 +3,41 @@ package com.insider.constants;
 import java.time.Duration;
 
 /**
- * Central place for all explicit wait durations.
+ * Central place for all wait times, expressed with intent.
+ * Timeouts can be scaled with the system property `timeouts.multiplier`.
+ * Example: -Dtimeouts.multiplier=2.0  => all waits x2
  */
 public final class Timeouts {
 
     private Timeouts() {
-        // Utility class: not meant to be instantiated
+        // utility class
     }
 
-    /** Default wait for visible / clickable UI elements (buttons, inputs, etc.). */
-    public static final Duration ELEMENT = Duration.ofSeconds(15);
+    // Read once at startup. Default = 1.0 (no change)
+    private static final double MULTIPLIER = Double.parseDouble(
+            System.getProperty("timeouts.multiplier", "1.0")
+    );
 
-    /** Wait for full page loads, URL changes and large layout updates. */
-    public static final Duration PAGE = Duration.ofSeconds(20);
+    private static Duration seconds(long baseSeconds) {
+        long scaled = (long) Math.ceil(baseSeconds * MULTIPLIER);
+        return Duration.ofSeconds(scaled);
+    }
+
+    /** Standard wait for visible / clickable elements (buttons, inputs, etc.) */
+    public static final Duration ELEMENT = seconds(15);
+
+    /** Wait for full page navigation, URL changes, big layout changes. */
+    public static final Duration PAGE = seconds(20);
 
     /**
-     * Wait for slower UI updates such as filters, animations
-     * or Ajax-based list refreshes (e.g. Open Positions filters).
+     * Wait for slow UI updates like filters, animations,
+     * Ajax-based lists (e.g. Open Positions filters).
      */
-    public static final Duration UI_REFRESH = Duration.ofSeconds(25);
+    public static final Duration UI_REFRESH = seconds(30); // biraz arttırdım
 
-    /** Short checks, e.g. verifying that an element is not present or is quickly rendered. */
-    public static final Duration QUICK_CHECK = Duration.ofSeconds(5);
+    /** Optional: very short checks (e.g. absence of element) */
+    public static final Duration QUICK_CHECK = seconds(5);
 
-    /** Extra buffer for dropdown open/close animations before interacting with options. */
-    public static final Duration DROPDOWN_ANIMATION = Duration.ofSeconds(15);
+    /** Dropdown açılma / animasyon gibi kısa ama görsel hareketler. */
+    public static final Duration DROPDOWN_ANIMATION = seconds(10);
 }

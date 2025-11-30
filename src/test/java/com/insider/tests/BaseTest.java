@@ -41,6 +41,10 @@ public abstract class BaseTest {
         // Explicit wait for page-level operations (navigation, URL changes, etc.)
         wait = new WebDriverWait(driver, PAGE);
     }
+    public WebDriver getDriver() {
+        return driver;
+    }
+    
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {

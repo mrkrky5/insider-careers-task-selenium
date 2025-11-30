@@ -16,6 +16,9 @@ import org.testng.annotations.Test;
 
 import static com.insider.constants.TestGroups.INTEGRATION;
 
+import org.openqa.selenium.StaleElementReferenceException;
+
+
 /**
  * Verifies that QA jobs can be filtered by location and that each result
  * matches the expected department and location, and that "View Role"
@@ -55,27 +58,34 @@ public class OpenPositionsPageTest extends BaseTest {
                 jobCards.isEmpty(),
                 "Job list should not be empty after applying QA + Istanbul filters."
         );
-
         int cardIndex = 0;
 
         for (WebElement jobCard : jobCards) {
             boolean isMatching = openPositionsPage.isJobCardMatchingQaIstanbulCriteria(jobCard);
-
+        
+            String cardTextSafe;
+            try {
+                cardTextSafe = jobCard.getText();
+            } catch (StaleElementReferenceException e) {
+                cardTextSafe = "<stale element - card text could not be read>";
+            }
+        
             String debugText =
-                    "Job card does not match expected QA criteria. Card index: "
-                            + cardIndex
-                            + System.lineSeparator()
-                            + "Card text:"
-                            + System.lineSeparator()
-                            + jobCard.getText();
-
+                "Job card does not match expected QA criteria. Card index: "
+                    + cardIndex
+                    + System.lineSeparator()
+                    + "Card text:"
+                    + System.lineSeparator()
+                    + cardTextSafe;
+        
             Assert.assertTrue(
-                    isMatching,
-                    debugText
+                isMatching,
+                debugText
             );
-
+        
             cardIndex++;
         }
+        
 
         // Remember current window and existing handles
         String originalWindowHandle = driver.getWindowHandle();

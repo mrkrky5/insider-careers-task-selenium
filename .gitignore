@@ -1,14 +1,16 @@
 # Maven build output
 /target/
 
-# IDE / editor
-/.idea/
-/.vscode/
+# IntelliJ IDEA
+.idea/
 *.iml
+out/
 
-# Logs
-*.log
+# VS Code
+.vscode/
 
-# OS
+# OS junk
 .DS_Store
-Thumbs.db
+
+# Test failure screenshots (do not commit)
+screenshots/

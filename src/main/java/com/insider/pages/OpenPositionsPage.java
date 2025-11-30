@@ -14,6 +14,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import org.openqa.selenium.support.ui.WebDriverWait;
+import static com.insider.constants.Timeouts.UI_REFRESH;
+
+
 /**
  * Page object for QA Open Positions with filters and job cards.
  */
@@ -83,14 +87,16 @@ public class OpenPositionsPage extends BasePage {
      * This is required because the text is set asynchronously by JS.
      */
     public void waitForDepartmentFilterToBeQualityAssurance() {
+        WebDriverWait uiWait = new WebDriverWait(driver, UI_REFRESH);
+    
         try {
-            String expectedText = EXPECTED_DEPARTMENT.getDisplayName();
-
-            wait.until(
-                    ExpectedConditions.textToBePresentInElementLocated(
-                            DEPARTMENT_FILTER_DROPDOWN,
-                            expectedText
-                    )
+            String expectedText = Department.QUALITY_ASSURANCE.getDisplayName();
+    
+            uiWait.until(
+                ExpectedConditions.textToBePresentInElementLocated(
+                    DEPARTMENT_FILTER_DROPDOWN,
+                    expectedText
+                )
             );
 
             // Simple debug log for troubleshooting if needed
@@ -162,19 +168,18 @@ public class OpenPositionsPage extends BasePage {
      * Scrolls to the job list and waits until at least one card is visible.
      */
     public void waitUntilJobCardsVisible() {
+        WebDriverWait uiWait = new WebDriverWait(driver, UI_REFRESH);
+    
         WebElement listSection =
-                wait.until(ExpectedConditions.presenceOfElementLocated(JOB_LIST_SECTION));
-
-        // Bring the job list into view so animations can complete
+            uiWait.until(ExpectedConditions.presenceOfElementLocated(JOB_LIST_SECTION));
+    
         ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView({block: 'start'});", listSection);
-
-        // Ensure wrapper is attached
-        wait.until(ExpectedConditions.presenceOfElementLocated(JOB_LIST_WRAPPER));
-
-        // Wait until at least one card is visible
-        wait.until(ExpectedConditions.visibilityOfElementLocated(JOB_CARD));
+            .executeScript("arguments[0].scrollIntoView({block: 'start'});", listSection);
+    
+        uiWait.until(ExpectedConditions.presenceOfElementLocated(JOB_LIST_WRAPPER));
+        uiWait.until(ExpectedConditions.visibilityOfElementLocated(JOB_CARD));
     }
+    
 
     /**
      * Returns all currently visible job cards.
