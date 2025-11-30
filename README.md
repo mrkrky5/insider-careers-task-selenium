@@ -110,6 +110,19 @@ End-to-end flow starting from the QA careers page: clicks “See all QA jobs”,
    cd insider-careers-task-selenium
    mvn test -DsuiteXmlFile=src/test/resources/testng.xml
 
+### Failure screenshots
+
+Whenever a test fails, the `ScreenshotOnFailureListener` captures a browser screenshot and saves it under the `screenshots/` folder in the project root.  
+This makes it easy to inspect what was on the page at the moment of failure and attach the image to bug reports if needed.
+
+### Configuration & Reporting
+
+- **Base URL** and **browser** values ​​can be overridden as system properties:
+  
+  ```bash
+  mvn test \
+    -DbaseUrl=https://useinsider.com \
+    -Dbrowser=chrome
 
 ## Notes
 
